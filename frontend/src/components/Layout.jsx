@@ -7,11 +7,11 @@ export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-black grid-bg">
       <Navbar onMenuClick={() => setSidebarOpen(true)} />
       <div className="flex">
         <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        <main className="flex-1 p-4 lg:p-6">
+        <main className="flex-1 p-4 lg:p-8 min-h-[calc(100vh-4rem)]">
           <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>

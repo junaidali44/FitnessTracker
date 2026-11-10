@@ -1,13 +1,17 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useTheme } from '../context/ThemeContext';
 import api from '../api/client';
-import { BellIcon, SunIcon, MoonIcon, ArrowRightOnRectangleIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import {
+  BellIcon,
+  ArrowRightOnRectangleIcon,
+  UserCircleIcon,
+  Bars3Icon,
+  BoltIcon,
+} from '@heroicons/react/24/outline';
 
 export default function Navbar({ onMenuClick }) {
   const { user, logout } = useAuth();
-  const { dark, toggle } = useTheme();
   const navigate = useNavigate();
   const [unread, setUnread] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,72 +29,118 @@ export default function Navbar({ onMenuClick }) {
   }, [user]);
 
   return (
-    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-30">
-      <div className="flex items-center justify-between px-4 lg:px-6 h-16">
+    <header className="h-16 bg-black/80 backdrop-blur-md border-b border-black-border sticky top-0 z-30">
+      <div className="h-full px-4 lg:px-6 flex items-center justify-between">
+        {/* Left */}
         <div className="flex items-center gap-3">
-          <button onClick={onMenuClick} className="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+          <button
+            onClick={onMenuClick}
+            className="lg:hidden p-2 text-text-secondary hover:text-text-primary hover:bg-black-card rounded-lg transition-colors"
+            aria-label="Toggle menu"
+          >
+            <Bars3Icon className="w-5 h-5" />
           </button>
-          <Link to="/dashboard" className="flex items-center gap-2">
-            <span className="text-2xl">💪</span>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
+
+          <Link to="/dashboard" className="flex items-center gap-2 group">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-crimson-500 to-accent flex items-center justify-center shadow-glow-sm group-hover:shadow-glow transition-all">
+              <BoltIcon className="w-5 h-5 text-white" />
+            </div>
+            <span className="font-display font-bold text-lg tracking-tight hidden sm:inline">
               FitTrack
             </span>
           </Link>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button onClick={toggle} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-            {dark ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
-          </button>
-
-          <Link to="/notifications" className="relative p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+        {/* Right */}
+        <div className="flex items-center gap-1.5">
+          <Link
+            to="/notifications"
+            className="relative p-2 text-text-secondary hover:text-text-primary hover:bg-black-card rounded-lg transition-colors"
+            aria-label="Notifications"
+          >
             <BellIcon className="w-5 h-5" />
             {unread > 0 && (
-              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-crimson-500 rounded-full ring-2 ring-black" />
             )}
           </Link>
 
+          {/* User menu */}
           <div className="relative">
-            <button onClick={() => setMenuOpen(!menuOpen)} className="flex items-center gap-2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex items-center gap-2 p-1 pr-2 hover:bg-black-card rounded-lg transition-colors"
+              aria-label="User menu"
+            >
               {user?.profilePicture ? (
-                <img src={user.profilePicture} alt={user.fullName} className="w-8 h-8 rounded-full object-cover" />
+                <img
+                  src={user.profilePicture}
+                  alt={user.fullName}
+                  className="w-8 h-8 rounded-full object-cover ring-2 ring-crimson-600/20"
+                />
               ) : (
-                <UserCircleIcon className="w-8 h-8 text-gray-600 dark:text-gray-400" />
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-crimson-500 to-accent flex items-center justify-center text-white font-display font-bold text-sm">
+                  {user?.fullName?.charAt(0).toUpperCase() || '?'}
+                </div>
               )}
-              <span className="hidden sm:inline text-sm font-medium">{user?.fullName?.split(' ')[0]}</span>
+              <span className="hidden sm:inline text-sm font-medium text-text-primary">
+                {user?.fullName?.split(' ')[0]}
+              </span>
             </button>
 
             {menuOpen && (
               <>
-                <div className="fixed inset-0 z-10" onClick={() => setMenuOpen(false)} />
-                <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-20 animate-fadeIn">
-                  <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
-                    <p className="font-medium">{user?.fullName}</p>
-                    <p className="text-xs text-gray-500">{user?.email}</p>
+                <div
+                  className="fixed inset-0 z-10"
+                  onClick={() => setMenuOpen(false)}
+                />
+                <div className="absolute right-0 mt-2 w-60 glass-card p-2 z-20 animate-scale-in">
+                  <div className="px-3 py-2.5 border-b border-black-border mb-1">
+                    <p className="font-semibold text-text-primary text-sm truncate">
+                      {user?.fullName}
+                    </p>
+                    <p className="text-xs text-text-muted truncate">
+                      {user?.email}
+                    </p>
                     {user?.role === 'Admin' && (
-                      <span className="inline-block mt-1 px-2 py-0.5 text-xs bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 rounded">
+                      <span className="inline-block mt-1.5 badge-primary text-2xs">
                         Admin
                       </span>
                     )}
                   </div>
-                  <Link to="/profile" onClick={() => setMenuOpen(false)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm">
+
+                  <Link
+                    to="/profile"
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center gap-2 px-3 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-black-elevated rounded-lg transition-colors"
+                  >
+                    <UserCircleIcon className="w-4 h-4" />
                     Profile
                   </Link>
-                  <Link to="/settings" onClick={() => setMenuOpen(false)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm">
-                    Settings
-                  </Link>
+
                   {user?.role === 'Admin' && (
-                    <Link to="/admin" onClick={() => setMenuOpen(false)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm">
+                    <Link
+                      to="/admin"
+                      onClick={() => setMenuOpen(false)}
+                      className="flex items-center gap-2 px-3 py-2 text-sm text-crimson-400 hover:text-crimson-300 hover:bg-crimson-600/10 rounded-lg transition-colors"
+                    >
+                      <BoltIcon className="w-4 h-4" />
                       Admin Panel
                     </Link>
                   )}
-                  <hr className="my-2 border-gray-200 dark:border-gray-700" />
-                  <button onClick={() => { setMenuOpen(false); logout(); navigate('/'); }} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm text-red-500 flex items-center gap-2">
-                    <ArrowRightOnRectangleIcon className="w-4 h-4" /> Logout
-                  </button>
+
+                  <div className="border-t border-black-border mt-1 pt-1">
+                    <button
+                      onClick={() => {
+                        setMenuOpen(false);
+                        logout();
+                        navigate('/');
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-crimson-400 hover:text-crimson-300 hover:bg-crimson-600/10 rounded-lg transition-colors"
+                    >
+                      <ArrowRightOnRectangleIcon className="w-4 h-4" />
+                      Sign out
+                    </button>
+                  </div>
                 </div>
               </>
             )}
