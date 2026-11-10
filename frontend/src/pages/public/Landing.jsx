@@ -51,67 +51,103 @@ export default function Landing() {
           </div>
         </div>
       </nav>
-
-      {/* ==================== HERO ==================== */}
-      <section className="relative pt-20 pb-32 overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute inset-0 radial-glow pointer-events-none" />
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-crimson-600/10 rounded-full blur-[120px] pointer-events-none" />
-
-        <div className="relative max-w-5xl mx-auto px-6 text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-crimson-600/30 bg-crimson-600/10 mb-8 animate-fade-in">
-            <div className="w-1.5 h-1.5 rounded-full bg-crimson-500" />
-            <span className="text-xs font-medium text-crimson-400">
-              Built for people who actually track
-            </span>
+{/* Hero */}
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden border-b border-black-border/30">
+        
+        {/* --- RIGHT SIDE: IMAGE WITH TRIANGLE CUT --- */}
+        {/* 
+          clip-path polygon coordinates: 
+          Top-Left (20% 0%), Top-Right (100% 0%), Bottom-Right (100% 100%), Bottom-Left (0% 100%) 
+          This creates the diagonal slash.
+        */}
+        <div 
+          className="absolute inset-y-0 right-0 w-full lg:w-[60%] h-full z-0"
+          style={{
+            clipPath: 'polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%)',
+          }}
+        >
+          {/* Background Image / Graphic */}
+          <div className="absolute inset-0 bg-black">
+            {/* 
+              If you want a real image later, uncomment this:
+              <img src="/your-hero-image.jpg" className="w-full h-full object-cover opacity-60" />
+            */}
+            
+            {/* Abstract Glowing Gradients to simulate an image */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-crimson-600/30 via-black to-black" />
+            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[100px]" />
+            <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-crimson-500/20 rounded-full blur-[80px]" />
+            
+            {/* Optional Grid overlay on the image side */}
+            <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20 mix-blend-overlay" />
           </div>
 
-          {/* Headline */}
-          <h1 className="text-hero mb-6 animate-fade-up">
-            Stop guessing.<br />
-            <span className="text-gradient-crimson">Start tracking.</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up">
-            The all-in-one fitness tracker for people who are serious about progress.
-            Log workouts, meals, and measurements — then watch the numbers move.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-16 animate-fade-up">
-            <Link to="/register">
-              <Button variant="primary" size="lg" className="min-w-[200px]">
-                Start Free
-                <ArrowRightIcon className="w-5 h-5" />
-              </Button>
-            </Link>
-            <Link to="/login">
-              <Button variant="secondary" size="lg" className="min-w-[200px]">
-                I have an account
-              </Button>
-            </Link>
+          {/* Red Accent Line on the diagonal edge */}
+          <div className="absolute inset-0 pointer-events-none">
+            <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+              <line x1="20" y1="0" x2="0" y2="100" stroke="rgba(220, 38, 38, 0.4)" strokeWidth="0.5" />
+            </svg>
           </div>
+        </div>
 
-          {/* Live stat preview */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto animate-fade-up">
-            {[
-              { value: '50+', label: 'Exercises tracked' },
-              { value: '1.2M', label: 'Calories logged' },
-              { value: '10K+', label: 'Active users' },
-              { value: '99.9%', label: 'Uptime' },
-            ].map((stat) => (
-              <div key={stat.label} className="glass-card p-4">
-                <p className="text-2xl md:text-3xl font-display font-bold text-gradient-crimson">
-                  {stat.value}
-                </p>
-                <p className="text-xs text-text-muted mt-1">{stat.label}</p>
-              </div>
-            ))}
+        {/* --- LEFT SIDE: TEXT CONTENT --- */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 py-20">
+          <div className="max-w-xl lg:max-w-2xl">
+            
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-crimson-600/30 bg-crimson-600/10 mb-8 animate-fade-in backdrop-blur-sm">
+              <div className="w-1.5 h-1.5 rounded-full bg-crimson-500 animate-pulse" />
+              <span className="text-xs font-medium text-crimson-400">
+                Built for people who actually track
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="text-5xl lg:text-7xl font-display font-bold leading-[1.05] tracking-tight mb-6 animate-fade-up">
+              Stop guessing.<br />
+              <span className="text-gradient-crimson">Start tracking.</span>
+            </h1>
+
+            {/* Description */}
+            <p className="text-lg text-text-secondary mb-10 leading-relaxed max-w-lg animate-fade-up">
+              The all-in-one fitness tracker for people who are serious about progress.
+              Log workouts, meals, and measurements — then watch the numbers move.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 animate-fade-up">
+              <Link to="/register">
+                <Button variant="primary" size="lg" className="w-full sm:w-auto min-w-[180px]">
+                  Start Free
+                  <ArrowRightIcon className="w-5 h-5 ml-1" />
+                </Button>
+              </Link>
+              <Link to="/login">
+                <Button variant="secondary" size="lg" className="w-full sm:w-auto min-w-[180px]">
+                  I have an account
+                </Button>
+              </Link>
+            </div>
+
+            {/* Live stat preview (Moved below CTAs to anchor the bottom) */}
+            <div className="grid grid-cols-3 gap-6 pt-10 mt-10 border-t border-black-border/50 max-w-md animate-fade-up">
+              {[
+                { value: '50+', label: 'Exercises' },
+                { value: '1.2M', label: 'Calories' },
+                { value: '10K+', label: 'Active Users' },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <p className="text-2xl font-display font-bold text-text-primary">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs text-text-muted mt-1 uppercase tracking-wider">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
-
       {/* ==================== STORY / PROBLEM ==================== */}
       <section className="py-24 border-t border-black-border/30">
         <div className="max-w-5xl mx-auto px-6">
