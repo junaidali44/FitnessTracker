@@ -2,39 +2,44 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 
-import Landing from './pages/Landing';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
-import Dashboard from './pages/Dashboard';
-import Workouts from './pages/Workouts';
-import WorkoutForm from './pages/WorkoutForm';
-import Nutrition from './pages/Nutrition';
-import NutritionForm from './pages/NutritionForm';
-import Progress from './pages/Progress';
-import ProgressForm from './pages/ProgressForm';
-import Notifications from './pages/Notifications';
-import Settings from './pages/Settings';
-import Feedback from './pages/Feedback';
-import Profile from './pages/Profile';
-import AdminDashboard from './pages/Admin/AdminDashboard';
-import AdminUsers from './pages/Admin/AdminUsers';
-import AdminFeedback from './pages/Admin/AdminFeedback';
+// Auth pages
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
+
+// Public
+import Landing from './pages/public/Landing';
+
+// User pages
+import Dashboard from './pages/user/Dashboard';
+import Workouts from './pages/user/Workouts';
+import WorkoutForm from './pages/user/WorkoutForm';
+import Nutrition from './pages/user/Nutrition';
+import NutritionForm from './pages/user/NutritionForm';
+import Progress from './pages/user/Progress';
+import ProgressForm from './pages/user/ProgressForm';
+import Notifications from './pages/user/Notifications';
+import Settings from './pages/user/Settings';
+import Feedback from './pages/user/Feedback';
+import Profile from './pages/user/Profile';
+
+// Admin pages
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminUsers from './pages/admin/AdminUsers';
+import AdminFeedback from './pages/admin/AdminFeedback';
 
 export default function App() {
   return (
     <Routes>
-      {/* Landing — public, shown first to everyone */}
+      {/* Public */}
       <Route path="/" element={<Landing />} />
-
-      {/* Auth pages */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
 
-      {/* Protected app */}
+      {/* Protected — user */}
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
@@ -53,7 +58,7 @@ export default function App() {
         </Route>
       </Route>
 
-      {/* Admin */}
+      {/* Protected — admin */}
       <Route element={<ProtectedRoute adminOnly />}>
         <Route element={<Layout />}>
           <Route path="/admin" element={<AdminDashboard />} />
@@ -62,7 +67,6 @@ export default function App() {
         </Route>
       </Route>
 
-      {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

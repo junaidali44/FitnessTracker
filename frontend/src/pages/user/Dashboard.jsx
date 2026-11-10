@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../api/client';
+import api from '../../api/client';
 import toast from 'react-hot-toast';
-import { useAuth } from '../context/AuthContext';
-import { Spinner, Button } from '../components/ui';
+import { useAuth } from '../../context/AuthContext';
+import { Spinner, Button } from '../../components/ui';
 import {
   FireIcon,
   CakeIcon,

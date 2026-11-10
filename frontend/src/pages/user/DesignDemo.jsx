@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Card, Input, Select, Badge, Modal, Spinner, EmptyState } from '../components/ui';
+import { Button, Card, Input, Select, Badge, Modal, Spinner, EmptyState } from '../../components/ui';
 
 export default function DesignDemo() {
   const [modalOpen, setModalOpen] = useState(false);

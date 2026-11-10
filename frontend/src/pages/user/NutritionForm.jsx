@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import api from '../api/client';
+import api from '../../api/client';
 import toast from 'react-hot-toast';
-import { MEAL_TYPES } from '../utils/constants';
+import { MEAL_TYPES } from '../../utils/constants';
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const emptyFood = { name: '', quantity: '', unit: 'g', calories: '', protein: '', carbs: '', fat: '' };

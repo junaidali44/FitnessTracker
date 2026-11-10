@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import api from '../api/client';
+import api from '../../api/client';
 import toast from 'react-hot-toast';
-import LoadingSpinner from '../components/LoadingSpinner';
-import EmptyState from '../components/EmptyState';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import EmptyState from '../../components/EmptyState';
 import { formatDistanceToNow } from 'date-fns';
 
 export default function Notifications() {

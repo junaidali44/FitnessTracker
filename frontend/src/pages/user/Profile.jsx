@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
-import { useAuth } from '../context/AuthContext';
-import api from '../api/client';
+import { useAuth } from '../../context/AuthContext';
+import api from '../../api/client';
 import toast from 'react-hot-toast';
-import { FITNESS_GOALS } from '../utils/constants';
+import { FITNESS_GOALS } from '../../utils/constants';
 import { CameraIcon, PhotoIcon } from '@heroicons/react/24/outline';
 
 export default function Profile() {

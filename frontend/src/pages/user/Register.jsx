@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { Button, Input } from '../components/ui';
+import { useAuth } from '../../context/AuthContext';
+import { Button, Input } from '../../components/ui';
 import { BoltIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 

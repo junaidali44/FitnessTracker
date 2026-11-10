@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import api from '../api/client';
+import api from '../../api/client';
 import toast from 'react-hot-toast';
-import { WORKOUT_CATEGORIES, DIFFICULTY_LEVELS } from '../utils/constants';
+import { WORKOUT_CATEGORIES, DIFFICULTY_LEVELS } from '../../utils/constants';
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { validateForm, workoutSchema, validateTags } from '../../utils/validators';
+import { getFriendlyError, SUCCESS_MESSAGES } from '../../utils/errorMessages';
 
 export default function WorkoutForm() {
   const navigate = useNavigate();
@@ -52,34 +54,55 @@ export default function WorkoutForm() {
   const addExercise = () => setForm({ ...form, exercises: [...form.exercises, { name: '', sets: '', reps: '', weight: '' }] });
   const removeExercise = (i) => setForm({ ...form, exercises: form.exercises.filter((_, idx) => idx !== i) });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSaving(true);
-    try {
-      const payload = {
-        name: form.name,
-        category: form.category,
-        duration: Number(form.duration) || 0,
-        caloriesBurned: Number(form.caloriesBurned) || undefined,
-        difficulty: form.difficulty,
-        notes: form.notes,
-        tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
-        exercises: form.exercises.filter(ex => ex.name)
-      };
-      if (editing) {
-        await api.put(`/workouts/${id}`, payload);
-        toast.success('Workout updated');
-      } else {
-        await api.post('/workouts', payload);
-        toast.success('Workout logged! 💪');
-      }
-      navigate('/workouts');
-    } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to save');
-    } finally {
-      setSaving(false);
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setErrors({});
+
+  // Client-side validation
+  const { isValid, errors: validationErrors } = validateForm(form, workoutSchema);
+  const tagsCheck = validateTags(form.tags);
+  if (!tagsCheck.valid) validationErrors.tags = tagsCheck.error;
+
+  if (!isValid || !tagsCheck.valid) {
+    setErrors(validationErrors);
+    toast.error('Please fix the highlighted fields.');
+    return;
+  }
+
+  setSaving(true);
+  try {
+    const payload = {
+      name: form.name.trim(),
+      category: form.category,
+      duration: Number(form.duration) || 0,
+      caloriesBurned: Number(form.caloriesBurned) || undefined,
+      difficulty: form.difficulty,
+      notes: form.notes.trim(),
+      tags: form.tags.split(',').map((t) => t.trim()).filter(Boolean),
+      exercises: form.exercises
+        .filter((ex) => ex.name.trim())
+        .map((ex) => ({
+          name: ex.name.trim(),
+          sets: Number(ex.sets) || 0,
+          reps: Number(ex.reps) || 0,
+          weight: Number(ex.weight) || 0,
+        })),
+    };
+    if (editing) {
+      await api.put(`/workouts/${id}`, payload);
+      toast.success(SUCCESS_MESSAGES.WORKOUT_UPDATED);
+    } else {
+      await api.post('/workouts', payload);
+      toast.success(SUCCESS_MESSAGES.WORKOUT_CREATED);
     }
-  };
+    navigate('/workouts');
+  } catch (error) {
+    toast.error(getFriendlyError(error));
+  } finally {
+    setSaving(false);
+  }
+};
 
   if (loading) return <div>Loading...</div>;
 

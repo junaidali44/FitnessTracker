@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { useTheme } from '../context/ThemeContext';
-import api from '../api/client';
+import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
+import api from '../../api/client';
 import toast from 'react-hot-toast';
-import { FITNESS_GOALS } from '../utils/constants';
+import { FITNESS_GOALS } from '../../utils/constants';
 
 export default function Settings() {
   const { user } = useAuth();
