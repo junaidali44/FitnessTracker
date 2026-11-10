@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Button } from '../components/ui/Button';
+import  Button  from '../components/ui/Button';
+
 import {
   BoltIcon,
   ChartBarSquareIcon,
@@ -16,7 +17,6 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-black grid-bg text-text-primary overflow-x-hidden">
 
-      {/* ==================== NAVBAR ==================== */}
       <nav className="relative z-20 border-b border-black-border/50 backdrop-blur-sm bg-black/60 sticky top-0">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
