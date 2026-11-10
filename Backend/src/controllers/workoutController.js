@@ -1,3 +1,4 @@
+import { sendWorkoutEmail } from '../services/emailService.js';
 import Workout from '../models/Workout.js';
 import { asyncHandler } from '../middleware/errorHandler.js';
 import { calculateWorkoutCalories } from '../services/calculationService.js';
@@ -46,18 +47,24 @@ export const getWorkoutById = asyncHandler(async (req, res) => {
 export const createWorkout = asyncHandler(async (req, res) => {
   const data = { ...req.body, user: req.user._id };
 
-  // Auto-calculate calories if not provided
   if (!data.caloriesBurned && data.duration && data.category) {
     data.caloriesBurned = calculateWorkoutCalories(data.duration, data.category);
   }
 
   const workout = await Workout.create(data);
 
-  // Auto-notify
+  // In-app notification
   await notifyWorkoutComplete(req.user._id, workout.name, workout.caloriesBurned);
   
   // Update streak
-  await updateStreak(req.user._id);
+  const streakData = await updateStreak(req.user._id);
+
+  // Email notification (if user has email notifications enabled)
+  if (req.user.preferences?.emailNotifications !== false) {
+    sendWorkoutEmail(req.user, workout, streakData?.current).catch(err =>
+      console.error('Workout email failed:', err.message)
+    );
+  }
 
   res.status(201).json({
     success: true,

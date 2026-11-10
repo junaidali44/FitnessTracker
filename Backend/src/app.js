@@ -15,7 +15,8 @@ import settingsRoutes from './routes/settingsRoutes.js';
 import feedbackRoutes from './routes/feedbackRoutes.js';
 import exportRoutes from './routes/exportRoutes.js';
 import { errorHandler } from './middleware/errorHandler.js';
-
+import adminRoutes from './routes/adminRoutes.js';
+import searchRoutes from './routes/searchRoutes.js';
 const app = express();
 
 // Security & Middleware
@@ -27,7 +28,7 @@ app.use(cors({
 app.use(compression());
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Rate limiting
 const limiter = rateLimit({
@@ -56,6 +57,8 @@ app.use('/api/notifications', notificationRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/export', exportRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/search', searchRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

@@ -1,0 +1,241 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0a0a0a;
+  color: #fafafa;
+  min-height: 100vh;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(220, 38, 38, 0.3);
+  color: #fafafa;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0f0f0f; }
+::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Clash Display', 'Satoshi', 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: #fafafa;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Display text — used for hero headlines */
+.text-hero {
+  font-family: 'Clash Display', 'Satoshi', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+/* ============================================
+   COMPONENT UTILITIES
+   ============================================ */
+@layer components {
+  /* ---------- BUTTONS ---------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-crimson-600 text-white hover:bg-crimson-700 active:scale-[0.98];
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.25);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
+  }
+
+  .btn-secondary {
+    @apply btn bg-black-card text-text-primary border border-black-border hover:bg-black-elevated hover:border-zinc-700 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-text-secondary hover:text-text-primary hover:bg-black-card active:scale-[0.98];
+  }
+
+  .btn-danger {
+    @apply btn bg-crimson-900 text-crimson-100 border border-crimson-800 hover:bg-crimson-800 active:scale-[0.98];
+  }
+
+  .btn-sm {
+    @apply px-3 py-1.5 text-sm;
+  }
+
+  /* ---------- CARDS ---------- */
+  .card {
+    @apply bg-black-card border border-black-border rounded-2xl;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .card-elevated {
+    @apply card bg-black-elevated;
+  }
+
+  .glass-card {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(20, 20, 20, 0.6) 100%);
+    @apply border border-black-border rounded-2xl backdrop-blur-md;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-250 hover:border-crimson-600/30;
+  }
+  .glass-card-hover:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 30px rgba(220, 38, 38, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* ---------- INPUTS ---------- */
+  .input {
+    @apply w-full px-4 py-2.5 bg-black-card border border-black-border rounded-lg text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-crimson-600/50 focus:border-crimson-600/50 transition-all;
+  }
+
+  .input-error {
+    @apply border-crimson-600/50;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-text-secondary mb-1.5;
+  }
+
+  /* ---------- BADGES ---------- */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply badge bg-crimson-600/15 text-crimson-400 border border-crimson-600/30;
+  }
+
+  .badge-success {
+    @apply badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/30;
+  }
+
+  .badge-warning {
+    @apply badge bg-amber-500/15 text-amber-400 border border-amber-500/30;
+  }
+
+  .badge-neutral {
+    @apply badge bg-black-elevated text-text-secondary border border-black-border;
+  }
+
+  /* ---------- TEXT UTILITIES ---------- */
+  .text-gradient-crimson {
+    @apply bg-gradient-to-r from-crimson-500 to-accent bg-clip-text text-transparent;
+  }
+
+  .text-display {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    @apply font-bold tracking-tight;
+  }
+
+  /* ---------- DIVIDERS ---------- */
+  .divider {
+    @apply h-px bg-black-border my-6;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  .section-title {
+    @apply text-2xl font-display font-bold text-text-primary mb-1;
+  }
+
+  .section-subtitle {
+    @apply text-sm text-text-secondary;
+  }
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+@layer utilities {
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .radial-glow {
+    background: radial-gradient(ellipse at top, rgba(220, 38, 38, 0.15) 0%, transparent 50%);
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ============================================
+   FOCUS STYLES (Accessibility)
+   ============================================ */
+:focus-visible {
+  outline: 2px solid rgba(220, 38, 38, 0.6);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline-offset: 4px;
+}

@@ -13,25 +13,37 @@ const seed = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log('✅ Connected');
 
-    // Clear existing
     await User.deleteMany({});
     await Workout.deleteMany({});
     await Nutrition.deleteMany({});
     await Progress.deleteMany({});
 
-    // Create test user
     const hashedPassword = await bcrypt.hash('Test@123', 10);
+    
+    // Regular test user
     const user = await User.create({
       fullName: 'Test User',
       email: 'test@fitness.com',
       password: hashedPassword,
+      role: 'User',
       age: 25,
       gender: 'Male',
       height: 175,
       weight: 70,
       fitnessGoals: 'Muscle Gain'
     });
-    console.log('✅ User created: test@fitness.com / Test@123');
+    console.log('✅ User: test@fitness.com / Test@123');
+
+    // Admin user
+    const admin = await User.create({
+      fullName: 'Admin User',
+      email: 'admin@fitness.com',
+      password: hashedPassword,
+      role: 'Admin',
+      age: 30,
+      gender: 'Prefer not to say'
+    });
+    console.log('✅ Admin: admin@fitness.com / Test@123');
 
     // Sample workouts
     const workouts = [
@@ -44,7 +56,6 @@ const seed = async () => {
     await Workout.insertMany(workouts);
     console.log(`✅ ${workouts.length} workouts seeded`);
 
-    // Sample nutrition
     const nutrition = [
       { mealType: 'Breakfast', foods: [{ name: 'Oats', quantity: 80, calories: 300, protein: 10, carbs: 54, fat: 6 }], totalCalories: 300, totalProtein: 10, totalCarbs: 54, totalFat: 6 },
       { mealType: 'Lunch', foods: [{ name: 'Chicken Rice', quantity: 1, calories: 600, protein: 40, carbs: 60, fat: 15 }], totalCalories: 600, totalProtein: 40, totalCarbs: 60, totalFat: 15 }
@@ -53,7 +64,6 @@ const seed = async () => {
     await Nutrition.insertMany(nutrition);
     console.log(`✅ ${nutrition.length} nutrition entries seeded`);
 
-    // Sample progress
     await Progress.create({
       user: user._id,
       weight: 70,
@@ -64,7 +74,9 @@ const seed = async () => {
     console.log('✅ Progress entry seeded');
 
     console.log('\n🎉 Seeding complete!');
-    console.log('Login: test@fitness.com / Test@123');
+    console.log('\nCredentials:');
+    console.log('User  → test@fitness.com / Test@123');
+    console.log('Admin → admin@fitness.com / Test@123');
     process.exit(0);
   } catch (error) {
     console.error('❌ Seed error:', error);
