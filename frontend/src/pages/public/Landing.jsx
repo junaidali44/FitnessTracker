@@ -66,19 +66,18 @@ export default function Landing() {
             clipPath: 'polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%)',
           }}
         >
-          {/* Background Image / Graphic */}
+          {/* Background Image */}
           <div className="absolute inset-0 bg-black">
-            {/* 
-              If you want a real image later, uncomment this:
-              <img src="/your-hero-image.jpg" className="w-full h-full object-cover opacity-60" />
-            */}
             
-            {/* Abstract Glowing Gradients to simulate an image */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-crimson-600/30 via-black to-black" />
-            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[100px]" />
-            <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-crimson-500/20 rounded-full blur-[80px]" />
+              <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" className="w-full h-full object-cover opacity-60" />
+           
             
-            {/* Optional Grid overlay on the image side */}
+            {/* Abstract Glowing */}
+             {/* <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-crimson-600/30 via-black to-black" /> */}
+            {/* <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[100px]" /> */}
+           <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-crimson-500/20 rounded-full blur-[80px]" />
+             
+            {/*  Grid overlay */}
             <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20 mix-blend-overlay" />
           </div>
 
@@ -90,7 +89,7 @@ export default function Landing() {
           </div>
         </div>
 
-        {/* --- LEFT SIDE: TEXT CONTENT --- */}
+        {/*LEFT SIDE*/}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 py-20">
           <div className="max-w-xl lg:max-w-2xl">
             
@@ -129,7 +128,7 @@ export default function Landing() {
               </Link>
             </div>
 
-            {/* Live stat preview (Moved below CTAs to anchor the bottom) */}
+            {/* Live stat preview */}
             <div className="grid grid-cols-3 gap-6 pt-10 mt-10 border-t border-black-border/50 max-w-md animate-fade-up">
               {[
                 { value: '50+', label: 'Exercises' },
@@ -148,7 +147,7 @@ export default function Landing() {
           </div>
         </div>
       </section>
-      {/* ==================== STORY / PROBLEM ==================== */}
+      {/* Story and planning */}
       <section className="py-24 border-t border-black-border/30">
         <div className="max-w-5xl mx-auto px-6">
           <div className="max-w-2xl mb-12">
