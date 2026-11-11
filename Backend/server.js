@@ -5,14 +5,14 @@ import { startCronJobs } from './src/services/cronService.js';
 import { verifyEmailService } from './src/services/emailService.js';
 
 dotenv.config();
+connectDB();
 
 const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
-    await connectDB();
-    await verifyEmailService();  // ← Add this line
-    startCronJobs();
+    await verifyEmailService(); 
+    // startCronJobs();
 
     const server = app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
