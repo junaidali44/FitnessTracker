@@ -11,7 +11,7 @@ dotenv.config();
 const seed = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log('✅ Connected');
+    console.log('Connected');
 
     await User.deleteMany({});
     await Workout.deleteMany({});
@@ -32,7 +32,7 @@ const seed = async () => {
       weight: 70,
       fitnessGoals: 'Muscle Gain'
     });
-    console.log('✅ User: test@fitness.com / Test@123');
+    console.log(' User: test@fitness.com / Test@123');
 
     // Admin user
     const admin = await User.create({
@@ -43,7 +43,7 @@ const seed = async () => {
       age: 30,
       gender: 'Prefer not to say'
     });
-    console.log('✅ Admin: admin@fitness.com / Test@123');
+    console.log(' Admin: admin@fitness.com / Test@123');
 
     // Sample workouts
     const workouts = [
@@ -54,7 +54,7 @@ const seed = async () => {
     ].map(w => ({ ...w, user: user._id, date: new Date() }));
 
     await Workout.insertMany(workouts);
-    console.log(`✅ ${workouts.length} workouts seeded`);
+    console.log(` ${workouts.length} workouts seeded`);
 
     const nutrition = [
       { mealType: 'Breakfast', foods: [{ name: 'Oats', quantity: 80, calories: 300, protein: 10, carbs: 54, fat: 6 }], totalCalories: 300, totalProtein: 10, totalCarbs: 54, totalFat: 6 },
@@ -62,7 +62,7 @@ const seed = async () => {
     ].map(n => ({ ...n, user: user._id, date: new Date() }));
 
     await Nutrition.insertMany(nutrition);
-    console.log(`✅ ${nutrition.length} nutrition entries seeded`);
+    console.log(`${nutrition.length} nutrition entries seeded`);
 
     await Progress.create({
       user: user._id,
@@ -71,15 +71,15 @@ const seed = async () => {
       measurements: { chest: 95, waist: 80, arms: 32 },
       performance: { benchPress: 60, pushups: 30, pullups: 8 }
     });
-    console.log('✅ Progress entry seeded');
+    console.log(' Progress entry seeded');
 
-    console.log('\n🎉 Seeding complete!');
+    console.log('\n Seeding complete!');
     console.log('\nCredentials:');
     console.log('User  → test@fitness.com / Test@123');
     console.log('Admin → admin@fitness.com / Test@123');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Seed error:', error);
+    console.error(' Seed error:', error);
     process.exit(1);
   }
 };

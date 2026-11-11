@@ -32,13 +32,13 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000, 
   max: 100,
   message: 'Too many requests, please try again later'
 });
 app.use('/api', limiter);
 
-// Auth rate limit (stricter)
+// Auth rate limit
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 10,
@@ -77,7 +77,7 @@ app.use((req, res) => {
   });
 });
 
-// Error handler (must be last)
+// Error handler 
 app.use(errorHandler);
 
 export default app;

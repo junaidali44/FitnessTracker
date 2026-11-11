@@ -138,14 +138,12 @@ export const deleteAccount = asyncHandler(async (req, res) => {
   res.json({ success: true, message: "Account deleted" });
 });
 
-// @desc    Forgot password
-// @route   POST /api/auth/forgot-password
 export const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
   const user = await User.findOne({ email });
   if (!user) {
-    // Security: don't reveal if user exists
+    // Security
     return res.json({
       success: true,
       message: 'If that email exists, a reset link has been sent.'
@@ -178,8 +176,6 @@ export const forgotPassword = asyncHandler(async (req, res) => {
   });
 });
 
-// @desc    Reset password
-// @route   POST /api/auth/reset-password
 export const resetPassword = asyncHandler(async (req, res) => {
   const { token, newPassword } = req.body;
 
