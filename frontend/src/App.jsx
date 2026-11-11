@@ -12,22 +12,22 @@ import ResetPassword from './pages/auth/ResetPassword';
 import Landing from './pages/public/Landing';
 
 // User pages
-import Dashboard from './pages/user/Dashboard';
-import Workouts from './pages/user/Workouts';
-import WorkoutForm from './pages/user/WorkoutForm';
-import Nutrition from './pages/user/Nutrition';
-import NutritionForm from './pages/user/NutritionForm';
-import Progress from './pages/user/Progress';
-import ProgressForm from './pages/user/ProgressForm';
-import Notifications from './pages/user/Notifications';
-import Settings from './pages/user/Settings';
-import Feedback from './pages/user/Feedback';
-import Profile from './pages/user/Profile';
+import Dashboard from './pages/user/Dashboard.jsx';
+import Workouts from './pages/user/Workouts.jsx';
+import WorkoutForm from './pages/user/WorkoutForm.jsx';
+import Nutrition from './pages/user/Nutrition.jsx';
+import NutritionForm from './pages/user/NutritionForm.jsx';
+import Progress from './pages/user/Progress.jsx';
+import ProgressForm from './pages/user/ProgressForm.jsx';
+import Notifications from './pages/user/Notifications.jsx';
+import Settings from './pages/user/Settings.jsx';
+import Feedback from './pages/user/Feedback.jsx';
+import Profile from './pages/user/Profile.jsx';
 
 // Admin pages
-import AdminDashboard from './pages/admin/AdminDashboard';
-import AdminUsers from './pages/admin/AdminUsers';
-import AdminFeedback from './pages/admin/AdminFeedback';
+import AdminDashboard from './pages/admin/AdminDashboard.jsx';
+import AdminUsers from './pages/admin/AdminUsers.jsx';
+import AdminFeedback from './pages/admin/AdminFeedback.jsx';
 
 export default function App() {
   return (
