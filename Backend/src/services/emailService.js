@@ -63,7 +63,7 @@ const emailTemplate = (title, body, buttonText, buttonUrl) => `
 </html>
 `;
 
-// ============ WELCOME EMAIL ============
+// Wellcome email
 export const sendWelcomeEmail = async (user) => {
   try {
     const html = emailTemplate(
@@ -102,7 +102,7 @@ export const sendWelcomeEmail = async (user) => {
   }
 };
 
-// ============ WORKOUT COMPLETION EMAIL ============
+// WORKOUT COMPLETION EMAIL 
 export const sendWorkoutEmail = async (user, workout, streak) => {
   try {
     const html = emailTemplate(
@@ -136,7 +136,7 @@ export const sendWorkoutEmail = async (user, workout, streak) => {
   }
 };
 
-// ============ PASSWORD RESET EMAIL ============
+// PASSWORD RESET EMAIL 
 export const sendPasswordResetEmail = async (user, resetToken) => {
   try {
     const resetUrl = `${process.env.APP_URL}/reset-password?token=${resetToken}`;

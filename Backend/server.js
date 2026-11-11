@@ -6,7 +6,7 @@ import { verifyEmailService } from './src/services/emailService.js';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5102;
 
 const startServer = async () => {
   try {
