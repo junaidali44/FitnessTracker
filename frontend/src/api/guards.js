@@ -1,9 +1,5 @@
 import { validateForm, loginSchema, registerSchema } from '../utils/validators';
 
-// ============================================
-// PRE-FLIGHT VALIDATORS
-// Block bad requests before they hit the server
-// ============================================
 
 /**
  * Validate login request
@@ -18,9 +14,6 @@ export function guardLogin(payload) {
   return { valid: true, error: null };
 }
 
-/**
- * Validate register request
- */
 export function guardRegister(payload) {
   const { isValid, errors } = validateForm(payload, registerSchema);
   if (!isValid) {
@@ -30,9 +23,7 @@ export function guardRegister(payload) {
   return { valid: true, error: null };
 }
 
-/**
- * Validate file upload
- */
+
 export function guardFileUpload(file, { maxSizeMB = 5, allowedTypes = ['image/jpeg', 'image/png', 'image/webp'] } = {}) {
   if (!file) return { valid: false, error: 'Please select a file.' };
 
@@ -54,9 +45,6 @@ export function guardFileUpload(file, { maxSizeMB = 5, allowedTypes = ['image/jp
   return { valid: true, error: null };
 }
 
-/**
- * Sanitize string input (defense in depth — backend also validates)
- */
 export function sanitizeString(value) {
   if (typeof value !== 'string') return value;
   return value.replace(/<[^>]*>/g, '').trim();

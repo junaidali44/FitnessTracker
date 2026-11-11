@@ -195,7 +195,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ==================== SOLUTION / FEATURES ==================== */}
+      {/*  SOLUTION AND FEATURES  */}
       <section className="py-24 border-t border-black-border/30 relative">
         <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-50 pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-6">
@@ -250,7 +250,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ==================== HOW IT WORKS ==================== */}
+      {/*  HOW IT WORKS  */}
       <section className="py-24 border-t border-black-border/30">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -293,7 +293,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ==================== TESTIMONIAL ==================== */}
+      {/*  TESTIMONIAL  */}
       <section className="py-24 border-t border-black-border/30">
         <div className="max-w-3xl mx-auto px-6">
           <div className="glass-card p-10 md:p-14 text-center relative">
@@ -315,7 +315,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ==================== FINAL CTA ==================== */}
+      {/*  FINAL CTA  */}
       <section className="py-24 border-t border-black-border/30 relative overflow-hidden">
         <div className="absolute inset-0 radial-glow pointer-events-none" />
         <div className="relative max-w-3xl mx-auto px-6 text-center">
@@ -345,7 +345,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ==================== FOOTER ==================== */}
+      {/*  FOOTER  */}
       <footer className="border-t border-black-border/30 py-10">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">

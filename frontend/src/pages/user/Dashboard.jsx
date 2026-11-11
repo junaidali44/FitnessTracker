@@ -84,7 +84,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-8 animate-fade-up">
-      {/* ============ HERO ============ */}
+      {/*  HERO */}
       <div className="relative glass-card p-6 md:p-8 overflow-hidden">
         {/* Ambient glow */}
         <div className="absolute -top-20 -right-20 w-64 h-64 bg-crimson-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -130,7 +130,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* ============ STATS ============ */}
+      {/*  STATS  */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           icon={FireIcon}
@@ -159,7 +159,7 @@ export default function Dashboard() {
         />
       </div>
 
-      {/* ============ CHART + QUICK ACTIONS ============ */}
+      {/*  CHART AND QUICK ACTIONS  */}
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Chart */}
         <div className="glass-card p-6">
@@ -240,7 +240,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* ============ TODAY'S WORKOUTS ============ */}
+      {/*  TODAY'S WORKOUTS  */}
       {data.today.workoutsList?.length > 0 && (
         <div className="glass-card p-6">
           <div className="flex items-center justify-between mb-6">
@@ -284,7 +284,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* ============ EMPTY STATE ============ */}
+      {/*  EMPTY STATE  */}
       {data.today.workoutsList?.length === 0 && (
         <div className="glass-card p-12 text-center">
           <div className="w-16 h-16 rounded-2xl bg-crimson-600/10 border border-crimson-600/20 flex items-center justify-center mx-auto mb-4">

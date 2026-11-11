@@ -1,21 +1,21 @@
 // VALIDATION REGEX PATTERNS
 export const REGEX = {
-  // Email — RFC 5322 simplified
+  // Email
   EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 
-  // Password — min 6 chars, at least 1 letter and 1 number
+  // Password 
   PASSWORD: /^(?=.*[A-Za-z])(?=.*\d).{6,}$/,
 
-  // Strong password — min 8, uppercase, lowercase, number, special
+  // Strong password 
   STRONG_PASSWORD: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
 
-  // Name — letters, spaces, hyphens, apostrophes (2-100 chars)
+  // Name 
   NAME: /^[a-zA-Z][a-zA-Z\s'-]{1,99}$/,
 
-  // Phone — international format
+  // Phone 
   PHONE: /^\+?[1-9]\d{1,14}$/,
 
-  // Number (positive, optional decimals)
+  // Number 
   NUMBER: /^\d+(\.\d{1,2})?$/,
 
   // Integer
@@ -30,21 +30,20 @@ export const REGEX = {
   // Mongo ObjectId
   OBJECT_ID: /^[a-fA-F0-9]{24}$/,
 
-  // Date (YYYY-MM-DD)
+  // Date 
   DATE: /^\d{4}-\d{2}-\d{2}$/,
 
-  // Time (HH:MM)
+  // Time 
   TIME: /^([01]\d|2[0-3]):([0-5]\d)$/,
 
-  // No HTML/script tags
+  // No HTML
   NO_HTML: /^[^<>]*$/,
 
-  // No special chars (for names in some contexts)
+  // No SPECIAL TEXT
   SAFE_TEXT: /^[a-zA-Z0-9\s.,!?'"()-]*$/,
 };
 
 // FIELD VALIDATORS
-// Each returns { valid: boolean, error: string | null }
 
 export const validateEmail = (value) => {
   if (!value) return { valid: false, error: 'Email is required' };
@@ -188,9 +187,7 @@ export const validateTags = (value, { max = 10, maxLength = 30 } = {}) => {
   return { valid: true, error: null };
 };
 
-// ============================================
-// FORM-LEVEL VALIDATOR (validates whole object)
-// ============================================
+// FORM VALIDATOR
 export const validateForm = (data, schema) => {
   const errors = {};
   let isValid = true;

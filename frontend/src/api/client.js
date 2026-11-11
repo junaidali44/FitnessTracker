@@ -10,7 +10,6 @@ const api = axios.create({
   timeout: 30000,
 });
 
-// Request interceptor — attach token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -21,14 +20,10 @@ api.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-
-// Response interceptor — friendly errors + auth redirect
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error.response?.status;
-
-    // Auth failure → redirect to login (but not for auth endpoints themselves)
     if (status === 401) {
       const path = window.location.pathname;
       const isAuthPath = [
@@ -48,8 +43,6 @@ api.interceptors.response.use(
         return Promise.reject(error);
       }
     }
-
-    // Attach friendly message to the error object for consistent use
     error.friendlyMessage = getFriendlyError(error);
 
     return Promise.reject(error);

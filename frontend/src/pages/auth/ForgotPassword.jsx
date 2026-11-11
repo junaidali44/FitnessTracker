@@ -36,9 +36,6 @@ export default function ForgotPassword() {
     }
   };
 
-  // ...rest of the JSX stays the same, but use <Input error={emailError} onBlur={handleBlur} />
-  // I'll paste the full JSX below:
-
   return (
     <div className="min-h-screen bg-black grid-bg flex items-center justify-center p-4 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-crimson-600/10 rounded-full blur-[120px] pointer-events-none" />

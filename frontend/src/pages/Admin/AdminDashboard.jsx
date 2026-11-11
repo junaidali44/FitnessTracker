@@ -24,10 +24,10 @@ export default function AdminDashboard() {
       <h1 className="text-2xl font-bold">🛡️ Admin Dashboard</h1>
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard icon="👥" label="Total Users" value={data.stats.totalUsers} subtitle={`+${data.stats.newUsersThisWeek} this week`} color="blue" />
-        <StatCard icon="🔥" label="Total Workouts" value={data.stats.totalWorkouts} color="orange" />
-        <StatCard icon="🍽️" label="Total Meals" value={data.stats.totalNutrition} color="primary" />
-        <StatCard icon="💬" label="Pending Feedback" value={data.stats.pendingFeedback} subtitle={`${data.stats.totalFeedback} total`} color="red" />
+        <StatCard icon="" label="Total Users" value={data.stats.totalUsers} subtitle={`+${data.stats.newUsersThisWeek} this week`} color="blue" />
+        <StatCard icon="" label="Total Workouts" value={data.stats.totalWorkouts} color="orange" />
+        <StatCard icon="" label="Total Meals" value={data.stats.totalNutrition} color="primary" />
+        <StatCard icon="" label="Pending Feedback" value={data.stats.pendingFeedback} subtitle={`${data.stats.totalFeedback} total`} color="red" />
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
