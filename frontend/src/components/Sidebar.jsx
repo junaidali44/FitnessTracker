@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import {
   HomeIcon,
   FireIcon,
@@ -8,9 +9,12 @@ import {
   Cog6ToothIcon,
   ChatBubbleLeftIcon,
   UserCircleIcon,
+  ShieldCheckIcon,
+  UsersIcon,
 } from '@heroicons/react/24/outline';
 
-const nav = [
+// 1. Define standard user navigation
+const userNav = [
   { name: 'Dashboard', path: '/dashboard', icon: HomeIcon },
   { name: 'Workouts', path: '/workouts', icon: FireIcon },
   { name: 'Nutrition', path: '/nutrition', icon: CakeIcon },
@@ -21,8 +25,20 @@ const nav = [
   { name: 'Profile', path: '/profile', icon: UserCircleIcon },
 ];
 
+// 2. Define admin-specific navigation
+const adminNav = [
+  { name: 'Admin Dashboard', path: '/admin', icon: ShieldCheckIcon },
+  { name: 'Manage Users', path: '/admin/users', icon: UsersIcon },
+  { name: 'Manage Feedback', path: '/admin/feedback', icon: ChatBubbleLeftIcon },
+  { name: 'Profile', path: '/profile', icon: UserCircleIcon }, // Admins still need a profile
+];
+
 export default function Sidebar({ open, onClose }) {
   const location = useLocation();
+  const { user } = useAuth();
+
+  // 3. Determine which navigation to show based on role
+  const navigation = user?.role === 'Admin' ? adminNav : userNav;
 
   return (
     <>
@@ -39,10 +55,10 @@ export default function Sidebar({ open, onClose }) {
       >
         <div className="flex flex-col h-full p-3">
           <nav className="flex-1 space-y-1">
-            {nav.map((item) => {
+            {navigation.map((item) => {
               const active =
                 location.pathname === item.path ||
-                (item.path !== '/dashboard' && location.pathname.startsWith(item.path));
+                (item.path !== '/dashboard' && item.path !== '/admin' && location.pathname.startsWith(item.path));
               const Icon = item.icon;
 
               return (

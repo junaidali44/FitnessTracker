@@ -19,6 +19,7 @@ import adminRoutes from './routes/adminRoutes.js';
 import searchRoutes from './routes/searchRoutes.js';
 const app = express();
 
+
 // Security & Middleware
 app.use(helmet());
 app.use(cors({
