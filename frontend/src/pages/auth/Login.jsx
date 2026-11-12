@@ -151,7 +151,7 @@ export default function Login() {
               <span className="text-text-muted">User:</span>{' '}
               <span className="text-text-primary">test@fitness.com</span>{' '}
               <span className="text-text-muted">/</span>{' '}
-              <span className="text-text-primary">Test@123</span>
+              <span className="text-text-primary">test@123</span>
             </p>
             <p>
               <span className="text-text-muted">Admin:</span>{' '}

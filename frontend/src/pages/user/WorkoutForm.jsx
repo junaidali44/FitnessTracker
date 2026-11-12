@@ -13,7 +13,7 @@ export default function WorkoutForm() {
   const editing = Boolean(id);
   const [loading, setLoading] = useState(editing);
   const [saving, setSaving] = useState(false);
-  const [errors, setErrors] = useState({}); // ✅ Added missing state
+  const [errors, setErrors] = useState({}); 
   
   const [form, setForm] = useState({
     name: '',

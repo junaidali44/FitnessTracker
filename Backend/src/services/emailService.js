@@ -81,7 +81,7 @@ const emailTemplate = (title, body, buttonText, buttonUrl) => `
       </div>
       <div class="footer">
         <p>&copy; ${new Date().getFullYear()} FitTrack. All rights reserved.</p>
-        <p>Built by Team CodeSlayers</p>
+        <p>Built by Syed Junaid ALi</p>
       </div>
     </div>
   </div>
@@ -89,7 +89,6 @@ const emailTemplate = (title, body, buttonText, buttonUrl) => `
 </html>
 `;
 
-// ============ WELCOME EMAIL ============
 export const sendWelcomeEmail = async (user) => {
   try {
     const html = emailTemplate(
